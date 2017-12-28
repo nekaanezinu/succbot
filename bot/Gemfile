@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'sqlite3'
+gem 'alch'
+gem 'require_all'
+gem 'activerecord'
+gem 'pry'
+gem 'gingerice'
+gem 'discordrb'
+gem 'recursive-open-struct'
