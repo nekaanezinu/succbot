@@ -4,6 +4,8 @@ require 'net/http'
 require 'json'
 require 'open-uri'
 require_relative 'models/rs_item'
+require 'pry'
+require 'activerecord-import'
 
 namespace :db do
 
@@ -50,14 +52,19 @@ namespace :db do
     puts 'Importing all RS3 items, this might take a while'
     ActiveRecord::Base.establish_connection(db_config)
     items = open('https://gist.github.com/anonymous/a987f72365eb5ef6f0cbafcf5e337a5e/raw/8c720f274f6c62babb6b933daf0d0da840b7c580/Latest%2520items%2520list.txt').read.split("\n")
-    puts "Importing #{items.count} items total"
+    new_items = []
     items.each do |item|
+      it = {}
       array = item.split(' - ')
-      i = RsItem.new
-      i.id = array.first
-      i.name = (array - [array.first]).join(' ')
-      i.save
+      it[:id] = array.first
+      it[:name] = (array - [array.first]).join(' ')
+      new_items << it
     end
+    # This is amazing
+    unique_items = new_items.uniq { |i| i[:name] }
+    total = unique_items.count
+    puts "Importing #{total} items total"
+    RsItem.import [:id, :name], unique_items
     puts 'Imported items successfully'
   end
 

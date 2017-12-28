@@ -1,3 +1,5 @@
 config/*.yml
 .gitigore
 Gemfile.lock
+bot
+log/

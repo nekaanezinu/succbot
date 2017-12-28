@@ -4,7 +4,6 @@ require 'require_all'
 require 'pry'
 require 'yaml'
 require 'alch'
-require 'gingerice'
 require 'recursive-open-struct'
 require_all 'models'
 
