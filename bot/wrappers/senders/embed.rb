@@ -3,19 +3,17 @@ require_all './decorators/embeds'
 
 module Senders
   class Embed
-    attr_accessor :event, :message, :embed_class, :command
-    def initialize(event, message, embed_class, command)
+    attr_accessor :event, :embed_class
+    def initialize(event, embed_class)
       @event = event
-      @message = message
       @embed_class = embed_class
-      @command = command
     end
 
     def send
       begin
-        event.channel.send_embed(message, embed_class.new(command, event).call)
+        event.channel.send_embed('', embed_class.new(event).call)
       rescue
-        event.respond 'I did not find that item 🤔'
+        event.respond 'I could not find that item 🤔'
       end
     end
   end

@@ -14,3 +14,5 @@ gem 'logging'
 gem 'searchkick'
 gem 'rake'
 gem 'activerecord-import'
+gem 'wikipedia-client', git: "https://github.com/nekaanezinu/wikipedia-client.git"
+gem 'concurrent-ruby', require: 'concurrent'
